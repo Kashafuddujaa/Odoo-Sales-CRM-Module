@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Odoo
+*.pyc
+.~lock.*
+*.swp
+
+# Local env / secrets
+.env
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Odoo filestore / logs (if run locally)
+data_dir/
+*.log

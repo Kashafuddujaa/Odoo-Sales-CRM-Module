@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_opportunity_summary" model="ir.actions.report">
+        <field name="name">Opportunity Summary</field>
+        <field name="model">crm.lead</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sales_crm.report_opportunity_summary</field>
+        <field name="report_file">sales_crm.report_opportunity_summary</field>
+        <field name="binding_model_id" ref="crm.model_crm_lead"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_form_inherit_sales_crm" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.sales.crm</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <div name="button_box" position="inside">
+                <button name="action_view_partner_interactions" type="object"
+                        class="oe_stat_button" icon="fa-comments"
+                        invisible="interaction_count == 0">
+                    <field name="interaction_count" widget="statinfo" string="Interactions"/>
+                </button>
+            </div>
+
+            <field name="category_id" position="after">
+                <field name="customer_tier" widget="badge"
+                       decoration-success="customer_tier == 'platinum'"
+                       decoration-info="customer_tier == 'gold'"/>
+                <field name="crm_currency_id" invisible="1"/>
+                <field name="customer_lifetime_value" widget="monetary"
+                       options="{'currency_field': 'crm_currency_id'}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

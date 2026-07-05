@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Customers action (partners) scoped to the Sales CRM app -->
+    <record id="action_sales_crm_customers" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_customer': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add a customer</p>
+            <p>Manage the companies and contacts you sell to, with tier and lifetime value insights.</p>
+        </field>
+    </record>
+
+    <!-- Root application menu -->
+    <menuitem id="menu_sales_crm_root"
+              name="Sales CRM"
+              web_icon="sales_crm,static/description/icon.png"
+              groups="group_sales_crm_user"
+              sequence="15"/>
+
+    <menuitem id="menu_sales_crm_pipeline"
+              name="Pipeline"
+              parent="menu_sales_crm_root"
+              action="action_sales_crm_pipeline"
+              sequence="10"/>
+
+    <menuitem id="menu_sales_crm_customers"
+              name="Customers"
+              parent="menu_sales_crm_root"
+              action="action_sales_crm_customers"
+              sequence="20"/>
+
+    <menuitem id="menu_sales_crm_interactions"
+              name="Interactions"
+              parent="menu_sales_crm_root"
+              action="action_sales_crm_interaction"
+              sequence="30"/>
+
+    <menuitem id="menu_sales_crm_followups"
+              name="Follow-ups"
+              parent="menu_sales_crm_root"
+              action="action_sales_crm_followup"
+              sequence="40"/>
+
+    <!-- Configuration parent (populated in later milestones) -->
+    <menuitem id="menu_sales_crm_config"
+              name="Configuration"
+              parent="menu_sales_crm_root"
+              sequence="90"
+              groups="group_sales_crm_admin"/>
+
+</odoo>

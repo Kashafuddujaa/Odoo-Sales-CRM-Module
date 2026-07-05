@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Add scoring + related records to the opportunity form -->
+    <record id="view_crm_lead_form_inherit_sales_crm" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.sales.crm</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+
+            <div name="button_box" position="inside">
+                <button name="action_view_interactions" type="object"
+                        class="oe_stat_button" icon="fa-comments">
+                    <field name="interaction_count" widget="statinfo" string="Interactions"/>
+                </button>
+                <button name="action_view_followups" type="object"
+                        class="oe_stat_button" icon="fa-clock-o">
+                    <field name="open_followup_count" widget="statinfo" string="Follow-ups"/>
+                </button>
+            </div>
+
+            <field name="expected_revenue" position="after">
+                <field name="lead_score" widget="progressbar"/>
+                <field name="score_grade" widget="badge"
+                       decoration-danger="score_grade == 'hot'"
+                       decoration-warning="score_grade == 'warm'"
+                       decoration-info="score_grade == 'cold'"/>
+                <field name="last_interaction_date"/>
+            </field>
+
+            <notebook position="inside">
+                <page name="interactions" string="Interactions">
+                    <field name="interaction_ids" context="{'default_partner_id': partner_id}">
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="name"/>
+                            <field name="interaction_type"/>
+                            <field name="direction"/>
+                            <field name="user_id"/>
+                            <field name="summary"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="followups" string="Follow-ups">
+                    <field name="followup_ids">
+                        <tree editable="bottom" decoration-danger="is_overdue"
+                              decoration-success="state == 'done'">
+                            <field name="due_date"/>
+                            <field name="name"/>
+                            <field name="user_id"/>
+                            <field name="priority" widget="priority"/>
+                            <field name="state" widget="badge"/>
+                            <field name="is_overdue" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <!-- Show the lead score in the opportunity list -->
+    <record id="view_crm_lead_tree_inherit_sales_crm" model="ir.ui.view">
+        <field name="name">crm.lead.tree.inherit.sales.crm</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <field name="expected_revenue" position="after">
+                <field name="lead_score" optional="show"/>
+                <field name="score_grade" optional="show" widget="badge"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Scored pipeline action surfaced under the Sales CRM menu -->
+    <record id="action_sales_crm_pipeline" model="ir.actions.act_window">
+        <field name="name">Pipeline</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
+        <field name="domain">[('type', '=', 'opportunity')]</field>
+        <field name="context">{'default_type': 'opportunity', 'search_default_assigned_to_me': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create an opportunity</p>
+            <p>Track deals through your pipeline with automated lead scoring.</p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="sales_crm.Dashboard">
+        <div class="o_sales_crm_dashboard p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="mb-0">Sales CRM Dashboard</h2>
+                <button class="btn btn-secondary" t-on-click="() => this.loadData()">
+                    <i class="fa fa-refresh me-1"/>Refresh
+                </button>
+            </div>
+
+            <div t-if="state.loading" class="text-center text-muted py-5">
+                <i class="fa fa-spinner fa-spin fa-2x"/>
+                <div class="mt-2">Loading KPIs...</div>
+            </div>
+
+            <div t-elif="state.data">
+                <div class="row g-3">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="o_kpi_card card h-100 shadow-sm" t-on-click="() => this.openPipeline()">
+                            <div class="card-body">
+                                <div class="o_kpi_label text-muted">Open Pipeline</div>
+                                <div class="o_kpi_value" t-esc="formatCurrency(state.data.pipeline_value)"/>
+                                <div class="text-muted small"><t t-esc="state.data.open_count"/> opportunities</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="o_kpi_card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <div class="o_kpi_label text-muted">Won This Month</div>
+                                <div class="o_kpi_value text-success" t-esc="formatCurrency(state.data.won_value)"/>
+                                <div class="text-muted small"><t t-esc="state.data.won_count"/> deals</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="o_kpi_card card h-100 shadow-sm">
+                            <div class="card-body">
+                                <div class="o_kpi_label text-muted">Avg. Lead Score</div>
+                                <div class="o_kpi_value" t-esc="state.data.avg_score"/>
+                                <div class="text-muted small">across open pipeline</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="o_kpi_card card h-100 shadow-sm" t-on-click="() => this.openOverdue()">
+                            <div class="card-body">
+                                <div class="o_kpi_label text-muted">Overdue Follow-ups</div>
+                                <div class="o_kpi_value"
+                                     t-att-class="state.data.overdue_followups > 0 ? 'text-danger' : 'text-success'"
+                                     t-esc="state.data.overdue_followups"/>
+                                <div class="text-muted small">need attention</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-1">
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Pipeline by Stage</h5>
+                                <div t-if="!state.data.by_stage.length" class="text-muted">No opportunities yet.</div>
+                                <t t-foreach="state.data.by_stage" t-as="stage" t-key="stage.stage">
+                                    <div class="mb-2">
+                                        <div class="d-flex justify-content-between small">
+                                            <span t-esc="stage.stage"/>
+                                            <span>
+                                                <t t-esc="formatCurrency(stage.value)"/>
+                                                (<t t-esc="stage.count"/>)
+                                            </span>
+                                        </div>
+                                        <div class="o_stage_bar">
+                                            <div class="o_stage_bar_fill" t-att-style="'width:' + stageWidth(stage.value)"/>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Open Leads by Grade</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span><span class="o_grade_dot o_grade_hot"/>Hot</span>
+                                    <strong t-esc="state.data.by_grade.hot"/>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span><span class="o_grade_dot o_grade_warm"/>Warm</span>
+                                    <strong t-esc="state.data.by_grade.warm"/>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span><span class="o_grade_dot o_grade_cold"/>Cold</span>
+                                    <strong t-esc="state.data.by_grade.cold"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

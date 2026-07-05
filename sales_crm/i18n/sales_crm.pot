@@ -1,0 +1,75 @@
+# Translation template for the Sales CRM module.
+# This file is distributed under the same license as the sales_crm package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sales_crm
+#: model:ir.model,name:sales_crm.model_sales_crm_interaction
+msgid "Customer Interaction"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.model,name:sales_crm.model_sales_crm_followup
+msgid "Sales Follow-up"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.model.fields,field_description:sales_crm.field_crm_lead__lead_score
+msgid "Lead Score"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.model.fields,field_description:sales_crm.field_crm_lead__score_grade
+msgid "Grade"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.model.fields.selection,name:sales_crm.selection__crm_lead__score_grade__hot
+msgid "Hot"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.model.fields.selection,name:sales_crm.selection__crm_lead__score_grade__warm
+msgid "Warm"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.model.fields.selection,name:sales_crm.selection__crm_lead__score_grade__cold
+msgid "Cold"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.model.fields,field_description:sales_crm.field_res_partner__customer_tier
+msgid "Customer Tier"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.actions.act_window,name:sales_crm.action_sales_crm_pipeline
+#: model:ir.ui.menu,name:sales_crm.menu_sales_crm_pipeline
+msgid "Pipeline"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.actions.client,name:sales_crm.action_sales_crm_dashboard
+#: model:ir.ui.menu,name:sales_crm.menu_sales_crm_dashboard
+msgid "Dashboard"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.ui.menu,name:sales_crm.menu_sales_crm_followups
+msgid "Follow-ups"
+msgstr ""
+
+#. module: sales_crm
+#: model:ir.ui.menu,name:sales_crm.menu_sales_crm_interactions
+msgid "Interactions"
+msgstr ""

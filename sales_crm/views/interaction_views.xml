@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sales_crm_interaction_tree" model="ir.ui.view">
+        <field name="name">sales.crm.interaction.tree</field>
+        <field name="model">sales.crm.interaction</field>
+        <field name="arch" type="xml">
+            <tree string="Interactions">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="interaction_type"/>
+                <field name="direction"/>
+                <field name="partner_id"/>
+                <field name="lead_id"/>
+                <field name="user_id"/>
+                <field name="duration" widget="float_time" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sales_crm_interaction_form" model="ir.ui.view">
+        <field name="name">sales.crm.interaction.form</field>
+        <field name="model">sales.crm.interaction</field>
+        <field name="arch" type="xml">
+            <form string="Interaction">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Discovery call with buyer"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="interaction_type"/>
+                            <field name="direction"/>
+                            <field name="date"/>
+                            <field name="duration" widget="float_time"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="lead_id"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Summary">
+                        <field name="summary" nolabel="1" placeholder="What was discussed..."/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sales_crm_interaction_search" model="ir.ui.view">
+        <field name="name">sales.crm.interaction.search</field>
+        <field name="model">sales.crm.interaction</field>
+        <field name="arch" type="xml">
+            <search string="Interactions">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="lead_id"/>
+                <field name="user_id"/>
+                <filter name="my_interactions" string="My Interactions"
+                        domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter name="calls" string="Calls" domain="[('interaction_type', '=', 'call')]"/>
+                <filter name="emails" string="Emails" domain="[('interaction_type', '=', 'email')]"/>
+                <filter name="meetings" string="Meetings" domain="[('interaction_type', '=', 'meeting')]"/>
+                <separator/>
+                <filter name="this_week" string="This Week"
+                        domain="[('date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_type" string="Type" context="{'group_by': 'interaction_type'}"/>
+                    <filter name="group_user" string="Salesperson" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_partner" string="Customer" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'date:week'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_sales_crm_interaction" model="ir.actions.act_window">
+        <field name="name">Interactions</field>
+        <field name="res_model">sales.crm.interaction</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_sales_crm_interaction_search"/>
+        <field name="context">{'search_default_my_interactions': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Log your first customer interaction</p>
+            <p>Record calls, emails and meetings to build a full history per customer and opportunity.</p>
+        </field>
+    </record>
+
+</odoo>

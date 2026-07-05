@@ -1,0 +1,49 @@
+.o_sales_crm_dashboard {
+    background-color: #f7f7f9;
+    min-height: 100%;
+
+    .o_kpi_card {
+        cursor: pointer;
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+    }
+
+    .o_kpi_label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    .o_kpi_value {
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    .o_stage_bar {
+        background-color: #e9ecef;
+        border-radius: 0.25rem;
+        height: 0.75rem;
+        overflow: hidden;
+    }
+
+    .o_stage_bar_fill {
+        background: linear-gradient(90deg, #5850ec, #10b9a6);
+        height: 100%;
+    }
+
+    .o_grade_dot {
+        display: inline-block;
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        margin-right: 0.4rem;
+
+        &.o_grade_hot { background-color: #dc3545; }
+        &.o_grade_warm { background-color: #fd7e14; }
+        &.o_grade_cold { background-color: #0dcaf0; }
+    }
+}

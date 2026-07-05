@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_opportunity_summary_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Opportunity Summary</h2>
+                <h3 class="mt-0" t-field="doc.name"/>
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <strong>Customer:</strong> <span t-field="doc.partner_id"/><br/>
+                        <strong>Salesperson:</strong> <span t-field="doc.user_id"/><br/>
+                        <strong>Sales Team:</strong> <span t-field="doc.team_id"/><br/>
+                        <strong>Stage:</strong> <span t-field="doc.stage_id"/>
+                    </div>
+                    <div class="col-6">
+                        <strong>Expected Revenue:</strong>
+                        <span t-field="doc.expected_revenue"
+                              t-options='{"widget": "monetary", "display_currency": doc.company_currency}'/><br/>
+                        <strong>Probability:</strong> <span t-field="doc.probability"/>%<br/>
+                        <strong>Lead Score:</strong> <span t-field="doc.lead_score"/> / 100
+                        (<span t-field="doc.score_grade"/>)<br/>
+                        <strong>Expected Closing:</strong> <span t-field="doc.date_deadline"/>
+                    </div>
+                </div>
+
+                <h4 class="mt-4">Recent Interactions</h4>
+                <table class="table table-sm o_main_table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Subject</th>
+                            <th>Salesperson</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.interaction_ids" t-as="line">
+                            <td><span t-field="line.date"/></td>
+                            <td><span t-field="line.interaction_type"/></td>
+                            <td><span t-field="line.name"/></td>
+                            <td><span t-field="line.user_id"/></td>
+                        </tr>
+                        <tr t-if="not doc.interaction_ids">
+                            <td colspan="4" class="text-muted">No interactions logged.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="mt-4">Open Follow-ups</h4>
+                <table class="table table-sm o_main_table">
+                    <thead>
+                        <tr>
+                            <th>Due Date</th>
+                            <th>Summary</th>
+                            <th>Assigned To</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.followup_ids" t-as="fu">
+                            <td><span t-field="fu.due_date"/></td>
+                            <td><span t-field="fu.name"/></td>
+                            <td><span t-field="fu.user_id"/></td>
+                            <td><span t-field="fu.state"/></td>
+                        </tr>
+                        <tr t-if="not doc.followup_ids">
+                            <td colspan="4" class="text-muted">No follow-ups scheduled.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_opportunity_summary">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sales_crm.report_opportunity_summary_document"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

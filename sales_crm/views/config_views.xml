@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_sales_crm_stages" model="ir.actions.act_window">
+        <field name="name">Pipeline Stages</field>
+        <field name="res_model">crm.stage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a pipeline stage</p>
+            <p>Define the stages an opportunity moves through. Mark a stage as won to
+               auto-close its open follow-ups.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_sales_crm_stages"
+              name="Pipeline Stages"
+              parent="menu_sales_crm_config"
+              action="action_sales_crm_stages"
+              sequence="10"/>
+
+</odoo>

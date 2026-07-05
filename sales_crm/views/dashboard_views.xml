@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- OWL client-action dashboard -->
+    <record id="action_sales_crm_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">sales_crm_dashboard</field>
+    </record>
+
+    <menuitem id="menu_sales_crm_dashboard"
+              name="Dashboard"
+              parent="menu_sales_crm_root"
+              action="action_sales_crm_dashboard"
+              sequence="5"/>
+
+    <!-- Pivot / graph analytics on the pipeline -->
+    <record id="action_sales_crm_report" model="ir.actions.act_window">
+        <field name="name">Pipeline Analysis</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="domain">[('type', '=', 'opportunity')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No data to analyse yet</p>
+            <p>Slice pipeline value and lead scores by stage, salesperson and team.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_sales_crm_reporting"
+              name="Reporting"
+              parent="menu_sales_crm_root"
+              action="action_sales_crm_report"
+              sequence="80"
+              groups="group_sales_crm_manager"/>
+
+</odoo>
