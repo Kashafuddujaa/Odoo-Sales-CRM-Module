@@ -54,6 +54,14 @@ class TestLeadScoring(TransactionCase):
             self.env["sales.crm.interaction"].create(
                 {"name": f"c{i}", "lead_id": lead.id}
             )
+        # An open follow-up contributes the final 5 points needed to reach 100.
+        self.env["sales.crm.followup"].create(
+            {
+                "name": "Close it",
+                "lead_id": lead.id,
+                "due_date": fields.Date.context_today(lead),
+            }
+        )
         lead.invalidate_recordset()
         self.assertEqual(lead.lead_score, 100)
         self.assertEqual(lead.score_grade, "hot")

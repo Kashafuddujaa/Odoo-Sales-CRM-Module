@@ -30,7 +30,7 @@
             <field name="lead_id" ref="demo_lead_globex"/>
             <field name="priority">2</field>
             <field name="due_date"
-                   eval="(datetime.datetime.now() + datetime.timedelta(days=3)).strftime('%Y-%m-%d')"/>
+                   eval="(datetime.now() + timedelta(days=3)).strftime('%Y-%m-%d')"/>
         </record>
 
     </data>

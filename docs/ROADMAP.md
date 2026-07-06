@@ -17,7 +17,7 @@ The installable, tested addon.
 | M5 | OWL KPI dashboard, pivot/graph analysis, QWeb PDF report | Done |
 | M6 | TransactionCase tests + GitHub Actions CI | Done |
 | M7 | Docs, README, i18n template, demo data | Done |
-| M8 | Live boot verification on a real Odoo instance | Pending |
+| M8 | Live boot verification on a real Odoo instance | Done |
 
 ## Phase 2 — Integrations & Reach
 
