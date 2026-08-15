@@ -9,7 +9,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: odoo:17.0
+    container:
+      image: odoo:17.0
+      # The odoo image runs as UID 101; the runner workspace is root-owned,
+      # so actions/checkout fails with EACCES unless we run as root.
+      options: --user root
 
     services:
       db:
