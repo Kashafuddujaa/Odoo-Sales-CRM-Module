@@ -1,5 +1,7 @@
 # Sales CRM Module for Odoo 17
 
+[![CI](https://github.com/Kashafuddujaa/Odoo-Sales-CRM-Module/actions/workflows/ci.yml/badge.svg)](https://github.com/Kashafuddujaa/Odoo-Sales-CRM-Module/actions/workflows/ci.yml)
+
 A custom CRM module for **Odoo 17** that extends the native CRM with lead scoring, follow-up management, customer interaction tracking, role-based security, reporting, and a custom OWL KPI dashboard.
 
 ## Features
