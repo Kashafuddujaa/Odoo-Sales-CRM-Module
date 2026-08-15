@@ -23,23 +23,7 @@ A custom CRM module for **Odoo 17** that extends the native CRM with lead scorin
 - PostgreSQL
 - Docker
 
-## Screenshots
 
-> *(Add screenshots here)*
-
-- Dashboard
-- Leads List
-- Lead Form
-- Sales Pipeline
-- Settings
-
-## Quick Start
-
-```bash
-docker compose up -d
-```
-
-Open **http://localhost:8069**, create a database, then install **Sales CRM** from the Apps menu.
 
 ## Testing
 
@@ -47,26 +31,11 @@ Open **http://localhost:8069**, create a database, then install **Sales CRM** fr
 - Demo data included
 - CI workflow supported
 
-## Project Structure
 
-```
-sales_crm/
-├── models/
-├── views/
-├── security/
-├── data/
-├── report/
-├── static/src/
-├── tests/
-├── demo/
 └── i18n/
 ```
 
-## Documentation
 
-- `docs/SETUP.md`
-- `docs/ARCHITECTURE.md`
-- `docs/ROADMAP.md`
 
 ## Roadmap
 
